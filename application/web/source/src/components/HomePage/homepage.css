@@ -1,0 +1,32 @@
+.homepage-container{
+    margin-top: 2rem;
+}
+
+.quiz-card-container{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 2rem;
+    cursor: default;
+}
+
+.quiz-card:hover{
+    cursor: pointer;
+}
+
+.quiz-card-button-icons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.edit-quiz-icon {
+    color: #01AE42;
+}
+
+.delete-quiz-icon {
+    color: #EE525F;
+}
+
+.hide {
+    display: none;
+}

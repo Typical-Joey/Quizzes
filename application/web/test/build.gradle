@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+}
+
+group 'org.it.quizzes'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.8.1'
+    testImplementation group: 'org.testng', name: 'testng', version: '7.7.1'
+}
+
+test {
+    useTestNG()
+}
+//Suites
+task regression(type: Test) {
+    useTestNG();
+}
+task smoke(type: Test) {
+    useTestNG { includeGroups 'smoke' }
+}
+task acceptance(type: Test) {
+    useTestNG { includeGroups 'acceptance' }
+}
+task release(type: Test) {
+    useTestNG { includeGroups 'release' }
+}
+task debug(type: Test) {
+    useTestNG { includeGroups 'debug' }
+}
+task deployment(type: Test) {
+    useTestNG { includeGroups 'smoke', 'acceptance', 'release' }
+}
+
+tasks.withType(Test) {
+    systemProperties['headless'] = System.properties.getAt("headless")
+    systemProperties['env'] = System.properties["env"]
+    maxParallelForks = Runtime.runtime.availableProcessors() < 2 ? 1 : Runtime.runtime.availableProcessors() - 2
+}
